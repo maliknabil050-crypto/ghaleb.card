@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البطاقة الرقمية | غالب بن فيصل</title>
+    <!-- خط عربي أنيق من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: #050508;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(138, 43, 226, 0.1) 0%, transparent 40%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* حاوية البطاقة مع الهالة والحواف اللامعة المتحركة */
+        .card-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            padding: 3px; /* مسافة للإطار المتوهج */
+            border-radius: 28px;
+            background: linear-gradient(45deg, #d4af37, #ffffff, #8a2be2, #d4af37);
+            background-size: 300% 300%;
+            animation: borderGlow 6s ease infinite;
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.25), 
+                        0 0 60px rgba(138, 43, 226, 0.15);
+        }
+
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* الزجاج الشفاف الحقيقي */
+        .card-inner {
+            background: rgba(18, 18, 26, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 26px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* قسم الصورة الرمزية */
+        .avatar-box {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 20px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* الاسم واللقب */
+        h1 {
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 8px;
+            background: linear-gradient(to left, #fff, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .title {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 25px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* قائمة الأزرار والروابط */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 13px 18px;
+            border-radius: 14px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .btn i {
+            font-size: 20px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: #d4af37;
+        }
+
+        .btn span {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .btn .fa-chevron-left {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            background: none;
+            width: auto;
+            height: auto;
+        }
+
+        /* أزرار الإجراءات السفلية */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #050508;
+            border: none;
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            text-decoration: none;
+        }
+
+        .action-btn.secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: none;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.02);
+            opacity: 0.95;
+        }
+
+        .action-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* إشعار النسخ أو الحفظ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(18, 18, 26, 0.9);
+            border: 1px solid #d4af37;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="card-inner">
+            <!-- الصورة الرمزية أو الحرف الأول -->
+            <div class="avatar-box">
+                <div class="avatar">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+            </div>
+
+            <!-- معلومات الشخص -->
+            <h1>غالب بن فيصل</h1>
+            <div class="title">بطاقة الأعمال الرقمية</div>
+
+            <!-- الروابط وأزرار التفاعل -->
+            <div class="links-list">
+                <!-- الاتصال المباشر -->
+                <a href="tel:0502550564" class="btn">
+                    <div class="btn-content">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>الاتصال المباشر</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+
+                <!-- الواتساب -->
+                <a href="https://wa.me/966502550564" target="_blank" class="btn">
+                    <div class="btn-content">
+                        <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i>
+                        <span>محادثة واتساب</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+
+                <!-- سناب شات -->
+                <a href="https://www.snapchat.com" target="_blank" class="btn">
+                    <div class="btn-content">
+                        <i class="fa-brands fa-snapchat" style="color: #fffc00;"></i>
+                        <span>سناب شات</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+
+                <!-- تيك توك -->
+                <a href="https://www.tiktok.com" target="_blank" class="btn">
+                    <div class="btn-content">
+                        <i class="fa-brands fa-tiktok"></i>
+                        <span>تيك توك</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+
+                <!-- انستقرام -->
+                <a href="https://www.instagram.com" target="_blank" class="btn">
+                    <div class="btn-content">
+                        <i class="fa-brands fa-instagram" style="color: #e1306c;"></i>
+                        <span>انستقرام</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+            </div>
+
+            <!-- الأزرار السفلية (حفظ جهة الاتصال والمشاركة) -->
+            <div class="action-buttons">
+                <button class="action-btn" onclick="saveContact()">
+                    <i class="fa-solid fa-user-plus"></i> حفظ الرقم
+                </button>
+                <button class="action-btn secondary" onclick="shareCard()">
+                    <i class="fa-solid fa-share-nodes"></i> مشاركة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- عنصر الإشعار المنبثق -->
+    <div id="toast" class="toast">تم الحفظ بنجاح</div>
+
+    <script>
+        // دالة حفظ جهة الاتصال كملف vCard
+        function saveContact() {
+            const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:غالب بن فيصل
+TEL;TYPE=CELL:0502550564
+END:VCARD`;
+
+            const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'Ghalib_Bin_Faisal.vcf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            showToast('تم تحميل بطاقة الاتصال بنجاح!');
+        }
+
+        // دالة مشاركة الكارت
+        function shareCard() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'بطاقة الأعمال | غالب بن فيصل',
+                    text: 'تواصل مع غالب بن فيصل عبر البطاقة الرقمية',
+                    url: window.location.href,
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                showToast('تم نسخ رابط البطاقة!');
+            }
+        }
+
+        // إظهار رسالة التنبيه
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
